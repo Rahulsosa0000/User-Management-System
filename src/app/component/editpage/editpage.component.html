@@ -1,0 +1,78 @@
+<form [formGroup]="detailsform" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" formControlName="name" required />
+      <p *ngIf="detailsform.get('name')?.touched && detailsform.get('name')?.invalid" class="error">Required</p>
+    </div>
+  
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" formControlName="email" required />
+      <p *ngIf="detailsform.get('email')?.touched && detailsform.get('email')?.invalid" class="error">Required</p>
+    </div>
+  
+    <div class="form-group">
+      <label>Phone:</label>
+      <input type="text" formControlName="phone" required />
+      <p *ngIf="detailsform.get('phone')?.touched && detailsform.get('phone')?.invalid" class="error">Required</p>
+    </div>
+  
+    <div class="form-group">
+      <label>Date of Birth:</label>
+      <input type="date" formControlName="dob" required />
+      <p *ngIf="detailsform.get('dob')?.touched && detailsform.get('dob')?.invalid" class="error">Required</p>
+    </div>
+  
+    <div class="form-group">
+      <label>Gender:</label>
+      <select formControlName="gender" required>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+      <p *ngIf="detailsform.get('gender')?.touched && detailsform.get('gender')?.invalid" class="error">Required</p>
+    </div>
+  
+    <div class="form-group">
+      <label>Address:</label>
+      <textarea formControlName="address" required></textarea>
+      <p *ngIf="detailsform.get('address')?.touched && detailsform.get('address')?.invalid" class="error">Required</p>
+    </div>
+  
+    <div class="form-group">
+      <label>User Type:</label>
+      <div class="radio-group">
+        <input type="radio" formControlName="userType" value="admin" required /> Admin
+        <input type="radio" formControlName="userType" value="user" required /> User
+      </div>
+      <p *ngIf="detailsform.get('userType')?.touched && detailsform.get('userType')?.invalid" class="error">Required</p>
+    </div>
+  
+    <!-- State Dropdown -->
+    <label for="state" class="label">State:</label>
+    <select id="state" class="dropdown" formControlName="state" (change)="onStateChange($event)">
+      <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+    </select>
+    
+    <!-- District Dropdown -->
+    <label for="district" class="label">District:</label>
+    <select id="district" class="dropdown" formControlName="district" (change)="onDistrictChange($event)" [disabled]="!districts.length">
+      <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
+    </select>
+    
+    <!-- Taluka Dropdown -->
+    <label for="taluka" class="label">Taluka:</label>
+    <select id="taluka" class="dropdown" formControlName="taluka" (change)="onTalukaChange($event)" [disabled]="!talukas.length">
+      <option *ngFor="let taluka of talukas" [value]="taluka">{{ taluka }}</option>
+    </select>
+    
+    <!-- Village Dropdown -->
+    <label for="village" class="label">Village:</label>
+    <select id="village" class="dropdown" formControlName="village" [disabled]="!villages.length">
+      <option *ngFor="let village of villages" [value]="village">{{ village }}</option>
+    </select>
+  
+    <div class="button-group">
+      <button type="submit">Update</button>
+    </div>
+  </form>
+  

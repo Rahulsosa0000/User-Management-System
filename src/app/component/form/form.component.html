@@ -1,0 +1,107 @@
+<form [formGroup]="detailsform" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label>Name:</label>
+    <input type="text" formControlName="name" required />
+    <p *ngIf="detailsform.get('name')?.touched && detailsform.get('name')?.invalid" class="error">Required</p>
+  </div>
+
+  <div class="form-group">
+    <label>Email:</label>
+    <input type="email" formControlName="email" required />
+    <p *ngIf="detailsform.get('email')?.touched && detailsform.get('email')?.invalid" class="error">Required</p>
+  </div>
+
+  <div class="form-group">
+    <label>Password:</label>
+    <input type="password" formControlName="password" required />
+    <p *ngIf="detailsform.get('password')?.touched && detailsform.get('password')?.invalid" class="error">Required</p>
+  </div>
+
+  <div class="form-group">
+    <label>Phone:</label>
+    <input type="text" formControlName="phone" required />
+    <p *ngIf="detailsform.get('phone')?.touched && detailsform.get('phone')?.invalid" class="error">Required</p>
+  </div>
+
+  <div class="form-group">
+    <label>Date of Birth:</label>
+    <input type="date" formControlName="dob" required />
+    <p *ngIf="detailsform.get('dob')?.touched && detailsform.get('dob')?.invalid" class="error">Required</p>
+  </div>
+
+  <div class="form-group">
+    <label>Gender:</label>
+    <select formControlName="gender" required>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <p *ngIf="detailsform.get('gender')?.touched && detailsform.get('gender')?.invalid" class="error">Required</p>
+  </div>
+
+  <div class="form-group">
+    <label>Address:</label>
+    <textarea formControlName="address" required></textarea>
+    <p *ngIf="detailsform.get('address')?.touched && detailsform.get('address')?.invalid" class="error">Required</p>
+  </div>
+
+  <div class="form-group">
+    <label>User Type:</label>
+    <div class="radio-group">
+      <input type="radio" formControlName="userType" value="admin" required /> Admin
+      <input type="radio" formControlName="userType" value="user" required /> User
+    </div>
+    <p *ngIf="detailsform.get('userType')?.touched && detailsform.get('userType')?.invalid" class="error">Required</p>
+  </div>
+
+  <div class="form-group">
+    <label>Upload Zip File:</label>
+    <input type="file" (change)="onFileChange($event)" required />
+    <p *ngIf="zipFileError" class="error">{{ zipFileError }}</p>
+    <p *ngIf="detailsform.get('zipFile')?.touched && detailsform.get('zipFile')?.invalid" class="error">Required</p>
+  </div>
+
+  <!-- State Dropdown -->
+  <label for="state" class="label">State:</label>
+  <select id="state" class="dropdown" formControlName="state" (change)="onStateChange($event)">
+    <option value="" disabled selected>Select State</option>
+    <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+  </select>
+  <div *ngIf="detailsform.controls['state'].invalid && detailsform.controls['state'].touched" class="error-message">
+    <small>State is required</small>
+  </div>
+ 
+  <!-- District Dropdown -->
+  <label for="district" class="label">District:</label>
+  <select id="district" class="dropdown" formControlName="district" (change)="onDistrictChange($event)" [disabled]="!districts.length">
+    <option value="" disabled selected>Select District</option>
+    <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
+  </select>
+  <div *ngIf="detailsform.controls['district'].invalid && detailsform.controls['district'].touched" class="error-message">
+    <small>District is required</small>
+  </div>
+ 
+  <!-- Taluka Dropdown -->
+  <label for="taluka" class="label">Taluka:</label>
+  <select id="taluka" class="dropdown" formControlName="taluka" (change)="onTalukaChange($event)" [disabled]="!talukas.length">
+    <option value="" disabled selected>Select Taluka</option>
+    <option *ngFor="let taluka of talukas" [value]="taluka">{{ taluka }}</option>
+  </select>
+  <div *ngIf="detailsform.controls['taluka'].invalid && detailsform.controls['taluka'].touched" class="error-message">
+    <small>Taluka is required</small>
+  </div>
+ 
+  <!-- Village Dropdown -->
+  <label for="village" class="label">Village:</label>
+  <select id="village" class="dropdown" formControlName="village" [disabled]="!villages.length">
+    <option value="" disabled selected>Select Village</option>
+    <option *ngFor="let village of villages" [value]="village">{{ village }}</option>
+  </select>
+  <div *ngIf="detailsform.controls['village'].invalid && detailsform.controls['village'].touched" class="error-message">
+    <small>Village is required</small>
+  </div>
+
+  <div class="button-group">
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </div>
+</form>
