@@ -162,37 +162,6 @@ fetchUserData(userId: number) {
     this.detailsform.get('village')?.enable();
   }
 
- 
-
-
-
-// submit() {
-//   console.log("User ID before update:", this.userId);
-//   console.log("Form Data before update:", this.detailsform.value);
-
-//   if (this.userId === undefined || this.userId === null) {
-//       console.error("Error: User ID is undefined or null!");
-//       alert("Invalid User ID!");
-//       return;
-//   }
-
-//   if (this.detailsform.valid) {
-//     this.userservice.updateUser(this.userId, this.detailsform.value).subscribe(
-//       (response) => {
-//         console.log('User Updated:', response);
-//         alert("Updated successfully");
-//         this.router.navigate(['/dashboard']); // Redirect to dashboard
-//       },
-//       (error) => {
-//         console.error('Update Failed:', error);
-//         alert("Update failed! Please try again.");
-//       }
-//     );
-//   } else {
-//     console.log('Form is invalid');
-//   }
-// }
-
 
 submit() {
   console.log("User ID before update:", this.userId);
@@ -230,7 +199,4 @@ submit() {
 }
 
 }
-
-
-  
 
